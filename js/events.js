@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function() {
 // reload.addEventListener("click", restart);
 reload.onclick = restart
 send.onclick = function() {
-    validate(input.value);
+    startProcess(input.value);
   };
 
 input.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-        validate(input.value);
+        startProcess(input.value);
     }
 });
