@@ -6,12 +6,7 @@ let cantidadEncuestados = 0;  // Se utiliza para saber cuantos pokemons se inten
 const text = document.getElementById("resultText")
 const img = document.getElementById("imgpokemon")
 const puntaje = document.getElementById("puntaje")
-// // Variables used to modify info from pokemon card
-// const pokeCard = document.querySelector('#data-poke-card');
-// const pokeName = document.querySelector('#data-poke-name');
-// const pokeId = document.querySelector('#data-poke-id');
-// const pokeTypes = document.querySelector('#data-poke-types');
-// const pokeStats = document.querySelector('#data-poke-stats');
+
 
 
 let currentPokemon;
@@ -30,7 +25,18 @@ async function startProcess(pokeInput) {
       const pokemonId = validationResult.id;
       currentPokemonStats = await fetchPokemon(pokemonId);
       fillCard(currentPokemonStats)
+      setTimeout( () =>{
+        resetCard()
+      },5000)
     }
+}
+
+/**
+ * The function "resetCard" hides the element with the id "skills-description".
+ */
+function resetCard(){
+    const card = document.querySelector('#skills-description')
+    card.style = "display: none;"
 }
 
 /**
@@ -81,8 +87,9 @@ async function fetchPokemon(pokemonId){
     const url = `https://pokeapi.co/api/v2/pokemon/${parsedId}`;
     const response = await fetch(url, {});
     const data = await response.json();
-    currentPokemonStats = new PokemonStats(data);
-    return currentPokemonStats   
+    console.log(currentPokemon)
+    currentPokemon.stats = data
+    return currentPokemon
 }
 
 // ----------------------- Validating input starts -----------------------
